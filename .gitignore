@@ -1,0 +1,13 @@
+
+#ignore python cache and others
+__pycache__/
+*.py[cod]
+*.pyc
+
+
+
+#ignore the backend .env
+/backend/.env
+
+#ignore the virtualenviroment
+/backend/.venv
