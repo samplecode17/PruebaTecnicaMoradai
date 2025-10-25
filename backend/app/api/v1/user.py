@@ -3,7 +3,7 @@ from sqlmodel.ext.asyncio.session import AsyncSession
 from app.session import get_session
 from app.schemas.user import *
 from app.crud.user import *
-from app.models.user import User
+from app.core.security import get_current_user
 
 
 
@@ -13,7 +13,7 @@ router = APIRouter(prefix="/users", tags=["Users"])
 @router.post("/", summary="Crear un nuevo usuario", response_model=UserCreationResponse)
 async def create(
     user_create: UserBase,
-    session: AsyncSession = Depends(get_session)
+    session: AsyncSession = Depends(get_session),
 ):
   """
     Crea un nuevo usuario en la base de datos.
@@ -56,7 +56,8 @@ async def read(
 async def update(
     user_id: UUID,
     user_update: UserBase,
-    session: AsyncSession = Depends(get_session)
+    session: AsyncSession = Depends(get_session),
+    
 ):
     """
     Actualiza los datos de un usuario específico.
@@ -65,7 +66,8 @@ async def update(
 
 async def delete(
     user_id: UUID,
-    session: AsyncSession = Depends(get_session)
+    session: AsyncSession = Depends(get_session),
+    _: User = Depends(get_current_user), #need to be loged in
 ):
     """
     Elimina un usuario específico de la base de datos.

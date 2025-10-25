@@ -3,6 +3,8 @@ from sqlmodel.ext.asyncio.session import AsyncSession
 from app.session import get_session
 from app.schemas.referalcode import *
 from app.crud.referalcode import *
+from app.core.security import get_current_user
+from app.models.user import User
 
 
 router = APIRouter(prefix="/referalcodes", tags=["ReferralCodes"])
@@ -11,7 +13,8 @@ router = APIRouter(prefix="/referalcodes", tags=["ReferralCodes"])
 @router.post("/", response_model=ReferralCodeResponse, summary="Crear un codigo de referido")
 async def create(
     referralcode_create: ReferralCodeBase,
-    session: AsyncSession = Depends(get_session)
+    session: AsyncSession = Depends(get_session),
+    _: User = Depends(get_current_user),#need to be loged in
 ):
     """
     Crea un nuevo codigo de referido con los datos proporcionados.
@@ -81,7 +84,8 @@ async def update(
 @router.delete("/{referralcode_id}", summary="Eliminar un código de referido")
 async def delete(
     referralcode_id: int,
-    session: AsyncSession = Depends(get_session)
+    session: AsyncSession = Depends(get_session),
+    _: User = Depends(get_current_user), #need to be loged in
 ):
     """
     Elimina un código de referido por su ID. Esta acción no se puede deshacer.

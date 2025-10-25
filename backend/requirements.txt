@@ -4,4 +4,8 @@ sqlmodel
 asyncpg
 pytest
 dotenv
-psycopg
+psycopg[binary]
+pydantic-core>=2.0
+pydantic-settings>=2.0
+pyjwt
+python-multipart
