@@ -56,7 +56,13 @@ async def get_user_by_username(session: AsyncSession, username: str) -> User | N
 
 #update user
 async def update_user(session: AsyncSession, user_id: UUID, user_update: UserBase) -> User:
-  db_user = get_user(session, user_id)
+  db_user = await get_user(session, user_id)
+  if not db_user :
+    await session.rollback()
+    raise HTTPException(
+        status_code=status.HTTP_400_BAD_REQUEST,
+        detail="User does not exists"
+    )
   # extract only the fields that were actually provided in the update request to a dictionary
   user_data = user_update.model_dump(exclude_unset=True)
   for key, value in user_data.items():

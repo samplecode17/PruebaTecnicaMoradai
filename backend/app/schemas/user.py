@@ -11,8 +11,9 @@ class UserBase(BaseModel):
 
 class UserRead(UserBase):
     id: UUID
-    class Config:
-        orm_mode = True # allows returning SQLModel instances directly
+    model_config = {
+        "from_attributes": True
+    }
 
 class UserCreationResponse(BaseModel):
     response: str

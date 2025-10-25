@@ -1,5 +1,6 @@
 from typing import Optional
 from pydantic import (
+    ConfigDict,
     PostgresDsn,
     computed_field
 )
@@ -33,9 +34,10 @@ class Settings(BaseSettings):
             return f"http://{self.DOMAIN}"
         return f"https://{self.DOMAIN}"
 
-    class Config:
-        env_file = ".env"
-        env_file_encoding = 'utf-8'
+    model_config = ConfigDict(
+        env_file=".env",
+        env_file_encoding="utf-8"
+    )
     
     
     

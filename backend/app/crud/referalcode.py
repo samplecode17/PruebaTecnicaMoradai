@@ -3,7 +3,7 @@ from fastapi import HTTPException, status
 from sqlmodel.ext.asyncio.session import AsyncSession
 from app.models.referalcode import ReferralCode
 from app.models.user import User
-from app.schemas.referalcode import ReferralCodeBase, ReferralCodeUpdate, ReferralCodeVerification
+from app.schemas.referalcode import ReferralCodeBase, ReferralCodeVerification
 from uuid import UUID
 from sqlalchemy.exc import IntegrityError, SQLAlchemyError
 
@@ -88,21 +88,19 @@ async def verify_referralcode(session: AsyncSession, code: str) -> ReferralCodeV
         )
         
 #update referralcode
-async def update_referralcode(session: AsyncSession, referralcode_id: int, referralcode_update: ReferralCodeUpdate) -> ReferralCode:
+async def update_referralcode(session: AsyncSession, referralcode_id: int, referralcode_update: ReferralCodeBase) -> ReferralCode:
   db_referralcode = await get_referralcode(session, referralcode_id)
   #referralcode exists?
   if db_referralcode is None:
     #if not exists
     raise HTTPException(
-        status_code=status.HTTP_400_BAD_REQUEST,
+        status_code=status.HTTP_404_NOT_FOUND,
         detail="referralcode does not exist"
     )
   # extract only the fields that were actually provided in the update request to a dictionary
-  referralcode_data = referralcode_update.model_dump(exclude_unset=True)
-  for key, value in referralcode_data.items():
-    setattr(db_referralcode, key, value)
+  referralcode_data = ReferralCode(**referralcode_update.model_dump(exclude_unset=True))
   #update the referralcode        
-  session.add(db_referralcode)
+  session.add(referralcode_data)
   #
   try:
     await session.commit()
