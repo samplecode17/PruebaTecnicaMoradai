@@ -8,8 +8,6 @@ from pydantic import BaseModel
 class ReferralCodeBase(BaseModel):
     user_id: Optional[UUID] = None 
     
-class ReferralCodeCreate(ReferralCodeBase):
-    pass 
 
 class ReferralCodeRead(ReferralCodeBase):
     id: int
@@ -21,3 +19,9 @@ class ReferralCodeRead(ReferralCodeBase):
         
 class ReferralCodeUpdate(ReferralCodeBase):
     code: Optional[str]
+
+class ReferralCodeVerification(BaseModel):
+    exists: bool
+    
+class ReferralCodeResponse(BaseModel):
+    response: str
