@@ -2,6 +2,7 @@ from sqlmodel import select
 from fastapi import HTTPException, status
 from sqlmodel.ext.asyncio.session import AsyncSession
 from app.models.referalcode import ReferralCode
+from app.models.user import User
 from app.schemas.referalcode import ReferralCodeBase, ReferralCodeUpdate, ReferralCodeVerification
 from uuid import UUID
 from sqlalchemy.exc import IntegrityError, SQLAlchemyError
@@ -18,6 +19,13 @@ async def create_referralcode(session: AsyncSession, referralcode_create: Referr
             status_code=status.HTTP_400_BAD_REQUEST,
             detail="user_id is required for creating a referral code"
         )
+  # Check if the user exists
+  user = await session.get(User, referralcode_create.user_id)
+  if user is None:
+    raise HTTPException(
+        status_code=status.HTTP_404_NOT_FOUND,
+        detail=f"User with id {referralcode_create.user_id} does not exist"
+    )
   # extract only the fields that were actually provided in the get request to a dictionary
   db_referralcode = ReferralCode(**referralcode_create.model_dump(exclude_unset=True))
   session.add(db_referralcode)
@@ -81,7 +89,7 @@ async def verify_referralcode(session: AsyncSession, code: str) -> ReferralCodeV
         
 #update referralcode
 async def update_referralcode(session: AsyncSession, referralcode_id: int, referralcode_update: ReferralCodeUpdate) -> ReferralCode:
-  db_referralcode = get_referralcode(session, referralcode_id)
+  db_referralcode = await get_referralcode(session, referralcode_id)
   #referralcode exists?
   if db_referralcode is None:
     #if not exists

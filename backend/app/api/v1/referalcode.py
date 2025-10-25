@@ -24,7 +24,7 @@ async def create(
     result = await create_referralcode(session, referralcode_create)
     if not result:
         raise HTTPException(status_code=404, detail="Game not created")
-    return ReferralCodeResponse(result="referralcode created")
+    return ReferralCodeResponse(response="referralcode created")
 
 
 @router.get("/", response_model=list[ReferralCodeRead], summary="Obtener todos los codigos de referido")
@@ -77,7 +77,7 @@ async def update(
     result = await update_referralcode(session, referralcode_id, referralcode_update)
     if not result:
         raise HTTPException(status_code=404, detail="Game not found")
-    return ReferralCodeResponse(result="referralcode updated")
+    return ReferralCodeResponse(response="referralcode updated")
 
 
 
