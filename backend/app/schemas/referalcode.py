@@ -22,3 +22,6 @@ class ReferralCodeUpdate(ReferralCodeBase):
 
 class ReferralCodeVerification(BaseModel):
     exists: bool
+    
+class ReferralCodeResponse(BaseModel):
+    response: str
