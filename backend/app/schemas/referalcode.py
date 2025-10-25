@@ -19,3 +19,6 @@ class ReferralCodeRead(ReferralCodeBase):
         
 class ReferralCodeUpdate(ReferralCodeBase):
     code: Optional[str]
+
+class ReferralCodeVerification(BaseModel):
+    exists: bool

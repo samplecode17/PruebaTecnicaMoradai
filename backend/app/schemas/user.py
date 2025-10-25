@@ -13,3 +13,6 @@ class UserRead(UserBase):
     id: UUID
     class Config:
         orm_mode = True # allows returning SQLModel instances directly
+
+class UserCreationResponse(BaseModel):
+    response: str
