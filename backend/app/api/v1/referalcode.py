@@ -48,7 +48,7 @@ async def read(
     referralcode = await get_referralcode(session, referralcode_id)
     if not referralcode:
         raise HTTPException(status_code=404, detail="Referal code not found")
-    return referralcode
+    return ReferralCodeRead.model_validate(referralcode)
 
 
 @router.get("/verify/{referralcode}", response_model=ReferralCodeVerification, summary="Verificar el codigo de referido")
@@ -66,7 +66,7 @@ async def verify(
 @router.put("/{referralcode_id}", response_model=ReferralCodeResponse, summary="Actualizar un codigo de referido existente")
 async def update(
     referralcode_id: int,
-    referralcode_update: ReferralCodeUpdate,
+    referralcode_update: ReferralCodeBase,
     session: AsyncSession = Depends(get_session)
 ):
     """

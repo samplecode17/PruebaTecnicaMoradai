@@ -49,7 +49,7 @@ async def read(
     user = await get_user(session, user_id)
     if not user:
         raise HTTPException(status_code=404, detail="User not found")
-    return user
+    return UserRead.model_validate(user)
 
 
 @router.put("/{user_id}", response_model=UserRead, summary="Actualizar información de usuario")
