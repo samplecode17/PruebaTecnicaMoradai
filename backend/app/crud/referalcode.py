@@ -79,8 +79,8 @@ async def verify_referralcode(session: AsyncSession, code: str) -> ReferralCodeV
         result = await session.exec(
             select(ReferralCode).where(ReferralCode.code == code)
         )
-        referral = result.scalar_one_or_none()
-        return ReferralCodeVerification(exists=bool(referral))
+        exists = result.first() is not None
+        return ReferralCodeVerification(exists=exists)
     except SQLAlchemyError as e:
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,

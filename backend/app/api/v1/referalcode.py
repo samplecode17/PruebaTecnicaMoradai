@@ -59,8 +59,8 @@ async def verify(
     """
     Devuelve si el codigo de referido existe mediante el codigo.
     """
-    referralcode = await verify_referralcode(session, referralcode)
-    return referralcode
+    result = await verify_referralcode(session, referralcode)
+    return result
   
   
 @router.put("/{referralcode_id}", response_model=ReferralCodeResponse, summary="Actualizar un codigo de referido existente")

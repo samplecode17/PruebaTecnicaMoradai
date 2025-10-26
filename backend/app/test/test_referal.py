@@ -101,6 +101,74 @@ async def test_read_unexistent_referralcode(session):
     assert exec_info.value.status_code==404
     assert "referal code not found" in str(exec_info.value.detail).lower()
 
+#read all referral codes
+@pytest.mark.asyncio
+async def test_read_all_codes(session):
+    
+    #read with no code
+    check = await read_all(session)
+    assert check == []
+    
+    # user data
+    user_data = UserBase(
+        username="test",
+        email="usuario@example.com",
+        password="secure1234"
+    )
+    # create user
+    await create_user(user_data, session)
+    # get user by username
+    user = await get_user_by_username(session, user_data.username)
+    
+    #create the referal code 1
+    code = ReferralCodeBase(user_id=user.id,code="Hola")
+    await create(code, session)
+    
+    #create the referal code 2
+    code1 = ReferralCodeBase(user_id=user.id,code="Adios")
+    await create(code1, session)
+    
+    #read and ceck if all referalcodes are readed
+    check = await read_all(session)
+    read_code1 = await read(1,session)
+    read_code2 = await read(2,session)
+    correct_data = [read_code1,read_code2]
+    assert [c.model_dump() for c in correct_data] == [c.model_dump() for c in check]
+
+    
+#verify existence
+@pytest.mark.asyncio
+async def test_verfy_existent_reerralcode(session):
+    #read with no code
+    check = await read_all(session)
+    assert check == []
+    
+    # user data
+    user_data = UserBase(
+        username="test",
+        email="usuario@example.com",
+        password="secure1234"
+    )
+    # create user
+    await create_user(user_data, session)
+    # get user by username
+    user = await get_user_by_username(session, user_data.username)
+    
+    #create the referal code 0
+    code = ReferralCodeBase(user_id=user.id,code="Hola")
+    await create(code, session)
+    
+    #check if verfies correctly
+    check1 = ReferralCodeVerification(exists=True)
+    check2 = ReferralCodeVerification(exists=False)
+    
+    verification_correct = await verify("Hola",session)
+    verification_unexistent = await verify("Adios",session)
+    
+    assert check1 == verification_correct
+    assert check2 == verification_unexistent
+ 
+
 # update a referalcode correctly
 @pytest.mark.asyncio
 async def test_update_referalcode(session):
