@@ -1,5 +1,6 @@
 <template>
   <div class="success-container">
+    <img class="logo-image" src="https://framerusercontent.com/images/dEVRXt7ma4i9PhQDpqjd2e0g.png?scale-down-to=512" alt="Moradai Logo" />
     <h1 class="success-message">
       🎉 pago completado 🎉
     </h1>
@@ -31,6 +32,13 @@ const goToHome = () => {
   font-weight: bold;
   color: #2c3e50; 
   margin-bottom: 30px;
+}
+
+.logo-image {
+  max-width: 200px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 button {
