@@ -1,9 +1,10 @@
 import { createRouter, createWebHistory } from "vue-router";
-import Home from '@/views/Home'
-import Login from '@/views/Login'
-import Payed from '@/views/Payed'
-import Payment from '@/views/Payment'
-import Product from '@/views/Product'
+import Home from '@/views/Home.vue'
+import Login from '@/views/Login.vue'
+import Payed from '@/views/Payed.vue'
+import Payment from '@/views/Payment.vue'
+import Product from '@/views/Product.vue'
+import store from "@/store";
 
 //define the routes
 const routes = [
