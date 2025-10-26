@@ -1,4 +1,7 @@
 <template>
+  <!-- top bar -->
+  <TopBar />
+
   <div class="centered-container">
     <div class="flex-wrapper">
       <div class="image-column">
@@ -23,6 +26,7 @@
 import { ref, computed } from "vue";
 import { useRouter } from 'vue-router';
 import { useStore } from "vuex";
+import TopBar from '@/components/TopBar.vue';
 
 const router = useRouter();
 const store = useStore();
@@ -45,7 +49,7 @@ const Pay = async () => {
   if (verification.value) {
     router.push('/payed'); // go to paid page
   } else {
-    errorMessage.value = "Referral code not valid"; // show error
+    errorMessage.value = "Codigo de referido no válido, intentalo otravez"; // show error
   }
 };
 </script>
