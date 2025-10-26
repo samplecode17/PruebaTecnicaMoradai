@@ -2,5 +2,11 @@ import './assets/main.css'
 
 import { createApp } from 'vue'
 import App from './App.vue'
+import store from './store';
 
-createApp(App).mount('#app')
+//app creation
+const app = createApp(App);
+
+//inject vuex global state config
+app.use(store);
+
