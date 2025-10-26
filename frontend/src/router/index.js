@@ -17,6 +17,7 @@ const routes = [
     path: '/login',
     name: 'Login',
     component: Login,
+    meta: { onlyNotAuth: true},
   },
   {
     path: '/product',
@@ -27,13 +28,13 @@ const routes = [
     path: '/payment',
     name: 'Payment',
     component: Payment,
-    // meta: { requiresAuth: true }
+    meta: { requiresAuth: true }
   },
   {
     path: '/payed',
     name: 'Payed',
     component: Payed,
-    // meta: { requiresAuth: true }
+    meta: { requiresAuth: true }
   },
 ];
 
@@ -63,6 +64,10 @@ router.beforeEach(async (to, _from, next) => {
   // If route requires auth and user is not authenticated, redirect to login
   if (to.matched.some(record => record.meta.requiresAuth) && !updatedAuth) {
     return next('/login')
+  }
+  // If the user is autentificated in this page type return to home
+  if (to.matched.some(record => record.meta.onlyNotAuth) && updatedAuth) {
+    return next('/')
   }
   next()
 })

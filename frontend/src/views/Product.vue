@@ -1,4 +1,8 @@
 <template>
+  <!-- top bar -->
+  <TopBar />
+
+
   <div class="centered-container">
     <div class="flex-wrapper">
       <div class="image-column">
@@ -30,6 +34,7 @@
   </div>
 </template>
 <script setup>
+import TopBar from '@/components/TopBar.vue'
 import { useRouter } from 'vue-router'
 
 const router = useRouter()
