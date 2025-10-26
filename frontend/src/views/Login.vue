@@ -69,6 +69,7 @@ const handleRegister = async () => {
   align-items: center;
   min-height: 100vh;
   padding: 20px;
+  
 }
 
 .card {
@@ -79,6 +80,7 @@ const handleRegister = async () => {
   border: 1px solid #ccc;
   border-radius: 8px;
   overflow: hidden;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
 }
 
 /* sections */
