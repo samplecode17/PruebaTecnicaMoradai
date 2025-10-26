@@ -27,13 +27,13 @@ const routes = [
     path: '/payment',
     name: 'Payment',
     component: Payment,
-    meta: { requiresAuth: true }
+    // meta: { requiresAuth: true }
   },
   {
     path: '/payed',
     name: 'Payed',
     component: Payed,
-    meta: { requiresAuth: true }
+    // meta: { requiresAuth: true }
   },
 ];
 
