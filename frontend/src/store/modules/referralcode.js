@@ -19,16 +19,23 @@ const getters = {
 //enpoint calls
 const actions = {
   // calls the verification endpoint to 
-  async verifyReferralCode({ dispatch, commit }, code){
-    const response = await apiClient.get(`/referalcodes/verify/${code}`);
-    commit('setVerification', response);
+  async verifyReferralCode({ commit }, code){
+    try {
+      const response = await apiClient.get(`/referalcodes/verify/${code}`);
+      // extract the boolean
+      const exists = response.data.exists;
+      commit('setVerification', exists);
+    } catch (err) {
+      console.error('Error verifying code:', err);
+      commit('setVerification', false); // por seguridad, ponemos false si falla
+    }
   }
 }
 
 const mutations = {
   //set the response to the verification state of the global state
   setVerification(state, response) {
-    state.verification = response.exists;
+    state.verification = response;
   }
 }
 
