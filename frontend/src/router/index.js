@@ -5,6 +5,7 @@ import Payed from '@/views/Payed.vue'
 import Payment from '@/views/Payment.vue'
 import Product from '@/views/Product.vue'
 import store from "@/store";
+import CreationReferal from '@/views/CreationReferal.vue'
 
 //define the routes
 const routes = [
@@ -34,6 +35,12 @@ const routes = [
     path: '/payed',
     name: 'Payed',
     component: Payed,
+    meta: { requiresAuth: true }
+  },
+  {
+    path: '/referalcode',
+    name: 'Referal code creation',
+    component: CreationReferal,
     meta: { requiresAuth: true }
   },
 ];

@@ -4,7 +4,11 @@
     <h1 class="success-message">
       Bienvenidos a la prueba técnica de Moradai!
     </h1>
-    <button @click="goToHome">empezar</button>
+
+    <div class="button-row">
+      <button @click="goToHome">empezar</button>
+      <button class="referral-btn" @click="goToReferral">Crear código de referido</button>
+    </div>
   </div>
 </template>
 
@@ -17,6 +21,11 @@ const router = useRouter()
 // function to navigate to home
 const goToHome = () => {
   router.push('/product') // navigate to home
+}
+
+// function to navigate to referral code creation
+const goToReferral = () => {
+  router.push('/referalcode')
 }
 </script>
 
@@ -44,6 +53,13 @@ const goToHome = () => {
   margin-bottom: 30px;
 }
 
+/* button container */
+.button-row {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+}
+
 button {
   padding: 12px 30px;
   font-size: 1.2rem;
@@ -58,5 +74,14 @@ button {
 
 button:hover {
   background-color: #006afdff;
+}
+
+/* second button style */
+.referral-btn {
+  background-color: #2980b9;
+}
+
+.referral-btn:hover {
+  background-color: #3fa0f9;
 }
 </style>
