@@ -11,7 +11,7 @@ Consta de un **backend con API REST** y un **frontend para simular una compra co
 ## ⚙️ Estructura del proyecto
 
 ### 1️⃣ Backend
-
+```bash
 backend/
 ├── app/
 │ ├── api/
@@ -44,9 +44,9 @@ backend/
 ├── docker-compose.yml # Configuración de Docker
 └── requirements.txt # Dependencias de Python
 ---
-
+```
 ### 2️⃣ Frontend
-
+```bash
 frontend/
 ├── index.html
 ├── jsconfig.json
@@ -77,6 +77,7 @@ frontend/
 │   ├── Payed.vue # Confirmación de pago
 │   ├── Payment.vue # Página de pago
 │   └── Product.vue # Detalle de producto
+```
 ---
 ## 🚀 Instalación y ejecución
 
@@ -200,12 +201,13 @@ Así, `ReferralService`, `DiscountService`, etc., compartirían una interfaz com
 ---
 
 ### b) Aspectos de seguridad en producción
-- Sanitizar entradas y prevenir inyección SQL/JSON o .  
+- Sanitizar entradas y prevenir inyección SQL/JSON.  
 - Validar payloads con un esquema (p. ej. Joi o Zod).  
 - Limitar la tasa de peticiones por IP(rate limiting).  
 - HTTPS obligatorio.  
 - Logging de accesos y errores.  
 - Uso de tokens o API keys si se expone externamente.
+- Usar ids aleatorias y schemas //hablando de fastapi// con poca informacion critica como ids.
 
 ---
 
@@ -241,10 +243,10 @@ Para este módulo de referidos, una base **relacional** es más adecuada por la 
 
 - Backend: Render  
 - Frontend: Netlify  
-- Variables de entorno:  
-  ```
-  API_BASE_URL=https://moradai-referrals-api.onrender.com
-  ```
+- Desplegado en: [https://moradai.netlify.app/](https://moradai.netlify.app/)
+- Usar usuario y contraseña->
+  - usuario: admin
+  - contraseña: password
 
 ---
 
