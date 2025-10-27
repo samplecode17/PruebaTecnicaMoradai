@@ -1,0 +1,2 @@
+# Backend connection
+VITE_BACKEND_CONNECTION=http://localhost:8000/
