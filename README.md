@@ -83,6 +83,7 @@ frontend/
 
 ### 🔧 Requisitos previos
 - tener la versión de python y npm mas reciente
+- iniciar venv para el backend -> igualmente lo pongo en la seccion backend
 - poder ejecutar docker-compose
 - tener un .env en cada carpeta tanto frontend como backend (copiar todo lo del .envexample es lo que use en este caso)
 
@@ -90,6 +91,8 @@ frontend/
 
 ```bash
 cd backend
+python3 -m venv .venv
+source .venv/bin/activate                                              
 docker compose  up -d
 pip install -r requirements.txt
 ```
@@ -178,6 +181,7 @@ El frontend se iniciará en [http://localhost:5173](http://localhost:5173)
 
 ```bash
 cd backend
+source .venv/bin/activate
 pytest -v
 ```
 
