@@ -82,7 +82,7 @@ frontend/
 ## 🚀 Instalación y ejecución
 
 ### 🔧 Requisitos previos
-- tener la versión de python y npm mas reciente
+- tener la versión de python, pip y npm mas reciente
 - iniciar venv para el backend -> igualmente lo pongo en la seccion backend
 - poder ejecutar docker-compose
 - tener un .env en cada carpeta tanto frontend como backend (copiar todo lo del .envexample es lo que use en este caso)
