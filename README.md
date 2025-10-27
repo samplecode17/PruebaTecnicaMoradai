@@ -187,6 +187,8 @@ pytest -v
 - 🔹 Sin paginación
 - 🔹 UI básica (sin diseño avanzado)
 - 🔹 Falta encriptación de contraseña y login muy basico.
+- 🔹 Faltan mejorar schemas
+- 🔹 Falta HTML semantico, responsividad mínima
 
 ---
 
